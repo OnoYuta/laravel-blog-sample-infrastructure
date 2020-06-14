@@ -5,4 +5,9 @@ services:
     image: hashicorp/terraform:0.12.24
     working_dir: "/terraform"
     volumes:
-      - "./terraform:/terraform"
+      - ".:/terraform"
+  awscli:
+    image: amazon/aws-cli:latest
+    working_dir: "/workdir"
+    volumes:
+      - ".aws:/root/.aws"

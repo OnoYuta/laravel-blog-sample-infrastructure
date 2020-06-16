@@ -22,14 +22,7 @@ apply: ## Terraform apply command.
 destroy: ## Terraform destroy command.
 	docker-compose run --rm terraform destroy
 
-.PHONY: ip
-ip: ## Get Elastic IP of web server. 
-	docker-compose run --rm terraform output public_ip
-
 .PHONY: ssh
-ifeq (ssh,$(firstword $(MAKECMDGOALS)))
-  RUN_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
-  $(eval $(RUN_ARGS):;@:)
-endif
 ssh: ## SSH connect to web server. 
-	ssh -i laravel-blog-sample-key.id_rsa ec2-user@$(RUN_ARGS)
+	$(eval PUBLIC_IP := $(shell docker-compose run --rm terraform output public_ip))
+	ssh -i laravel-blog-sample-key.id_rsa ec2-user@$(PUBLIC_IP)

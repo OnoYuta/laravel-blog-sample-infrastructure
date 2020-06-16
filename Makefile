@@ -6,6 +6,10 @@ endif
 aws: ## AWS CLI commands with arguments.
 	docker-compose run --rm awscli $(RUN_ARGS)
 
+.PHONY: mv-key
+mv-key: ## Terraform fmt command.
+	mv ./laravel-blog-sample-key.id_rsa ~/.ssh/
+
 .PHONY: format
 format: ## Terraform fmt command.
 	docker-compose run --rm terraform fmt

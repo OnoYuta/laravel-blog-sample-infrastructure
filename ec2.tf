@@ -7,6 +7,7 @@ resource "aws_instance" "app" {
   user_data                   = file("user_data.sh")
   associate_public_ip_address = true
   vpc_security_group_ids      = [aws_security_group.web.id]
+  key_name                    = aws_key_pair.key_pair.id
 
   root_block_device {
     volume_size = "30"

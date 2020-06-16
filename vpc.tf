@@ -9,9 +9,10 @@ resource "aws_vpc" "vpc" {
 }
 
 resource "aws_subnet" "public_subnet_1" {
-  vpc_id            = aws_vpc.vpc.id
-  availability_zone = "${var.region}a"
-  cidr_block        = cidrsubnet(aws_vpc.vpc.cidr_block, 8, 0)
+  vpc_id                  = aws_vpc.vpc.id
+  availability_zone       = "${var.region}a"
+  cidr_block              = cidrsubnet(aws_vpc.vpc.cidr_block, 8, 0)
+  map_public_ip_on_launch = true
   tags = {
     Name = "${var.project_name}-public_subnet_1"
   }

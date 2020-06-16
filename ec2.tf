@@ -18,3 +18,8 @@ resource "aws_instance" "app" {
     Name = "${var.project_name}-app"
   }
 }
+
+resource "aws_eip" "elastic-ip" {
+  instance = aws_instance.app.id
+  vpc      = true
+}

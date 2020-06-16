@@ -6,10 +6,6 @@ endif
 aws: ## AWS CLI commands with arguments.
 	docker-compose run --rm awscli $(RUN_ARGS)
 
-.PHONY: mv-key
-mv-key: ## Terraform fmt command.
-	mv ./laravel-blog-sample-key.id_rsa ~/.ssh/
-
 .PHONY: format
 format: ## Terraform fmt command.
 	docker-compose run --rm terraform fmt
@@ -25,3 +21,8 @@ apply: ## Terraform apply command.
 .PHONY: destroy
 destroy: ## Terraform destroy command.
 	docker-compose run --rm terraform destroy
+
+.PHONY: ssh
+ssh: ## SSH connect to web server. 
+	$(eval PUBLIC_IP := $(shell docker-compose run --rm terraform output public_ip))
+	ssh -i laravel-blog-sample-key.id_rsa ec2-user@$(PUBLIC_IP)

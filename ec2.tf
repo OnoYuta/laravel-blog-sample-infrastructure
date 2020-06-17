@@ -1,5 +1,5 @@
 resource "aws_instance" "app" {
-  ami                         = "ami-03179588b2f59f257"
+  ami                         = "ami-0471ea40c46b4325d"
   instance_type               = "t2.micro"
   monitoring                  = true
   iam_instance_profile        = aws_iam_instance_profile.ecs_instance_profile.name

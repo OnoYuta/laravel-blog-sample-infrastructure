@@ -12,6 +12,14 @@
                 "containerPort": 9000
             }
         ],
-        "command": null
+        "command": null,
+        "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+                "awslogs-group": "service-app",
+                "awslogs-region": "ap-northeast-1",
+                "awslogs-stream-prefix": "service"
+            }
+        }
     }
 ]
